@@ -96,13 +96,17 @@ export function Sidebar({
           <div className="flex items-center gap-2.5 min-w-0">
             {/* App Icon / Home */}
             <div
-              className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+              className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-transform overflow-hidden ${
                 currentView === 'home'
-                  ? 'bg-primary-blue text-white shadow-sm'
-                  : 'bg-primary-blue/10 text-primary-blue group-hover:bg-primary-blue group-hover:text-white'
+                  ? 'ring-2 ring-primary-blue shadow-sm scale-105'
+                  : 'group-hover:scale-105'
               }`}
             >
-              <Home className="w-4 h-4" />
+              <img
+                src="/mindmoments-logo.svg"
+                alt="MindMoments"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="min-w-0">
               <h2

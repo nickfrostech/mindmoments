@@ -26,9 +26,11 @@ export function LandingView({ onSelectView, entriesCount }: LandingViewProps) {
       <section className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left Column: Bold Headline & Action Triggers */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-low border border-border-subtle text-xs font-medium text-primary-blue">
-            <Compass className="w-3.5 h-3.5" />
-            <span>MindMoments • Cognitive Diary &amp; Reflection</span>
+          <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-surface-low border border-border-subtle text-xs font-medium text-on-surface">
+            <img src="/mindmoments-logo.svg" alt="MindMoments" className="w-4 h-4 rounded-md" />
+            <span className="font-semibold text-primary-blue">MindMoments</span>
+            <span className="text-on-surface-muted">•</span>
+            <span className="text-on-surface-muted">Cognitive Diary &amp; Reflection</span>
           </div>
 
           <div className="space-y-3">

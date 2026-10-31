@@ -1,14 +1,63 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
-  title: 'MindMoments — Grounded Diary & Cognitive Reflection',
+  title: 'MindMoments — Cognitive Diary & Memory Reflection',
   description:
-    'A memory-grounded personal diary and cognitive reflection system powered by Google Gemma 2 open weights.',
+    'A private, local-first personal diary and cognitive reflection system to track focus, fatigue, and strategic decisions.',
+  applicationName: 'MindMoments',
+  authors: [{ name: 'MindMoments Team' }],
+  creator: 'MindMoments',
+  keywords: [
+    'cognitive diary',
+    'memory reflection',
+    'focus tracker',
+    'daily journal',
+    'local-first',
+    'indexeddb',
+    'open-weight ai',
+  ],
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/mindmoments-logo.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/mindmoments-logo.svg',
+    apple: '/mindmoments-logo.svg',
   },
+  openGraph: {
+    title: 'MindMoments — Cognitive Diary & Memory Reflection',
+    description:
+      'A private, local-first personal diary and cognitive reflection system to track focus, fatigue, and strategic decisions.',
+    url: 'https://mindmoments.app',
+    siteName: 'MindMoments',
+    images: [
+      {
+        url: '/mindmoments-logo.svg',
+        width: 64,
+        height: 64,
+        alt: 'MindMoments Logo',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'MindMoments — Cognitive Diary & Memory Reflection',
+    description:
+      'A private, local-first personal diary and cognitive reflection system to track focus, fatigue, and strategic decisions.',
+    images: ['/mindmoments-logo.svg'],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f8fafc' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090b' },
+  ],
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
