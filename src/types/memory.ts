@@ -112,5 +112,3 @@ export type ViewType =
   | 'aimind'
   | 'recap'
   | string; // for custom tag/list views
-
-export type ActiveTab = 'timeline' | 'forecast' | 'aimind' | 'recap';

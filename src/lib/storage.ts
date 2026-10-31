@@ -81,22 +81,6 @@ export function getStoredMoments(): MemoryEntry[] {
 }
 
 /**
- * Async fetch of moments directly from IndexedDB
- */
-export async function getMomentsFromIDB(): Promise<MemoryEntry[]> {
-  try {
-    const val = await get<MemoryEntry[]>(IDB_KEYS.MEMORIES);
-    if (val && Array.isArray(val)) {
-      memoryCache = val;
-      return val;
-    }
-  } catch (e) {
-    console.warn('[IDB] getMomentsFromIDB failed, using cache:', e);
-  }
-  return memoryCache;
-}
-
-/**
  * Save new moment into IndexedDB and cache
  */
 export function saveMoment(entry: Omit<MemoryEntry, 'id' | 'timestamp' | 'dateString' | 'timeString'>): MemoryEntry {

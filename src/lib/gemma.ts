@@ -14,19 +14,6 @@ export interface GemmaRequestOptions {
 	ollamaEndpoint?: string;
 }
 
-export interface ChatMessage {
-	id: string;
-	role: "user" | "assistant";
-	content: string;
-	timestamp?: string;
-	citedMoments?: Array<{
-		id: string;
-		date: string;
-		snippet: string;
-		tags: string[];
-	}>;
-}
-
 /**
  * Detect active AI Provider and Model
  */
