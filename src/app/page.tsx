@@ -23,6 +23,7 @@ import { AIMindChat } from '../components/AIMindChat';
 import { WeeklyRecapCard } from '../components/WeeklyRecapCard';
 import { SettingsModal } from '../components/SettingsModal';
 import { MomentDetailDrawer } from '../components/MomentDetailDrawer';
+import { LandingView } from '../components/LandingView';
 
 import {
   ViewType,
@@ -188,6 +189,14 @@ export default function Home() {
   // Dynamic header text & subtitle
   const headerMeta = useMemo(() => {
     switch (currentView) {
+      case 'home':
+        return {
+          title: 'MindMoments Overview',
+          subtitle: 'A private cognitive diary & fatigue anticipation companion',
+          emptyTitle: '',
+          emptySubtitle: '',
+          buttonText: '',
+        };
       case 'myday':
         return {
           title: 'My Day',
@@ -357,6 +366,16 @@ export default function Home() {
               : 'overflow-y-auto custom-scroll p-4 sm:p-6 lg:p-8'
           }`}
         >
+          {/* 0. Home / Landing Overview View */}
+          {currentView === 'home' && (
+            <div className="w-full pb-12 animate-in fade-in duration-200">
+              <LandingView
+                onSelectView={(v) => setCurrentView(v)}
+                entriesCount={moments.length}
+              />
+            </div>
+          )}
+
           {/* A. Occurrence Forecast View */}
           {currentView === 'forecast' && (
             <div className="max-w-4xl mx-auto w-full pb-12 animate-in fade-in duration-200">

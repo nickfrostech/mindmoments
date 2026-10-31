@@ -104,6 +104,7 @@ export interface AppSettings {
 }
 
 export type ViewType =
+  | 'home'
   | 'myday'
   | 'important'
   | 'all'

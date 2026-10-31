@@ -331,7 +331,7 @@ function generateDynamicChatReply(
 	const q = userPrompt.toLowerCase();
 
 	if (q.includes("hi") || q.includes("hello") || q.includes("hey")) {
-		return `Hello Nicholas! I'm here and ready to reflect with you. I'm actively grounding our conversation in your **${entries.length} recorded diary entries**. What's on your mind today? You can ask about your past decisions, fatigue triggers, or focus rhythms.`;
+		return `Hello! I'm here and ready to reflect with you. I'm actively grounding our conversation in your **${entries.length} recorded diary entries**. What's on your mind today? You can ask about your past decisions, fatigue triggers, or focus rhythms.`;
 	}
 
 	if (

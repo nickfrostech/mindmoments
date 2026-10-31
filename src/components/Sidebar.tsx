@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {
+  Home,
   Sun,
   Star,
   Infinity as InfinityIcon,
@@ -78,24 +79,54 @@ export function Sidebar({
           isOpenMobile ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        {/* User Profile Header (Microsoft To Do style) */}
-        <div className="p-3.5 border-b border-border-subtle flex items-center justify-between">
+        {/* Home & App Guide Header Button */}
+        <button
+          type="button"
+          onClick={() => {
+            onSelectView('home');
+            onCloseMobile();
+          }}
+          className={`w-full p-3.5 border-b border-border-subtle flex items-center justify-between text-left transition-colors group ${
+            currentView === 'home'
+              ? 'bg-primary-blue/10'
+              : 'hover:bg-surface-low'
+          }`}
+          title="Home & App Overview"
+        >
           <div className="flex items-center gap-2.5 min-w-0">
-            {/* Avatar */}
-            <div className="w-8 h-8 rounded-full bg-primary-blue text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-sm">
-              {userName.charAt(0)}
+            {/* App Icon / Home */}
+            <div
+              className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                currentView === 'home'
+                  ? 'bg-primary-blue text-white shadow-sm'
+                  : 'bg-primary-blue/10 text-primary-blue group-hover:bg-primary-blue group-hover:text-white'
+              }`}
+            >
+              <Home className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h2 className="text-xs font-bold text-on-surface truncate leading-tight">
-                {userName}
+              <h2
+                className={`text-xs font-bold truncate leading-tight ${
+                  currentView === 'home' ? 'text-primary-blue' : 'text-on-surface'
+                }`}
+              >
+                MindMoments
               </h2>
               <p className="text-[10px] text-on-surface-muted truncate">
-                {userEmail}
+                Home &amp; App Overview
               </p>
             </div>
           </div>
-          <ChevronDown className="w-3.5 h-3.5 text-on-surface-muted shrink-0" />
-        </div>
+          <span
+            className={`text-[10px] font-semibold px-2 py-0.5 rounded-md transition-colors ${
+              currentView === 'home'
+                ? 'bg-primary-blue text-white'
+                : 'bg-surface-low text-on-surface-muted group-hover:text-on-surface'
+            }`}
+          >
+            Home
+          </span>
+        </button>
 
         {/* Search Bar */}
         <div className="p-3 border-b border-border-subtle">

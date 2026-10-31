@@ -62,7 +62,7 @@ export function AIMindChat({ entries, settings }: AIMindChatProps) {
 				{
 					id: "welcome-msg",
 					role: "assistant",
-					content: `Hello Nicholas! I'm your AI Mind, powered by open-weight models. I have direct context of your **${entries.length} recorded moments**, decisions, and energy rhythms.\n\nWhat would you like to explore or reflect on today?`,
+					content: `Hello! I'm your AI Mind, powered by open-weight models. I have direct context of your **${entries.length} recorded moments**, decisions, and energy rhythms.\n\nWhat would you like to explore or reflect on today?`,
 					timestamp: new Date().toLocaleTimeString([], {
 						hour: "2-digit",
 						minute: "2-digit",
