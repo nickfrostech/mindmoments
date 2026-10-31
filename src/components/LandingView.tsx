@@ -4,18 +4,13 @@ import React from 'react';
 import {
   Compass,
   ArrowRight,
-  Sparkles,
-  Target,
-  Brain,
-  History,
-  ShieldCheck,
-  CheckCircle2,
-  Calendar,
+  MessageSquare,
   Zap,
-  Tag,
+  Brain,
   Lock,
   ChevronRight,
-  MessageSquare,
+  CheckCircle2,
+  Clock,
 } from 'lucide-react';
 import { ViewType } from '../types/memory';
 
@@ -26,40 +21,41 @@ interface LandingViewProps {
 
 export function LandingView({ onSelectView, entriesCount }: LandingViewProps) {
   return (
-    <div className="max-w-5xl mx-auto w-full space-y-8 pb-16 animate-in fade-in duration-200">
-      {/* 1. Hero Overview Section */}
-      <section className="glass-card p-6 sm:p-10 rounded-2xl relative overflow-hidden border border-border-subtle shadow-sm space-y-6">
-        <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-low border border-border-subtle text-xs font-semibold text-primary-blue">
+    <div className="max-w-5xl mx-auto w-full space-y-14 py-4 sm:py-8 pb-16 animate-in fade-in duration-200">
+      {/* 1. Proper Hero Section (Spacious on-canvas, NO enclosing card) */}
+      <section className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* Left Column: Bold Headline & Action Triggers */}
+        <div className="lg:col-span-7 space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-low border border-border-subtle text-xs font-medium text-primary-blue">
             <Compass className="w-3.5 h-3.5" />
-            <span>Personal Cognitive Diary &amp; Memory Reflection</span>
+            <span>MindMoments • Cognitive Diary &amp; Reflection</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-on-surface tracking-tight leading-tight">
-            Remember every breakthrough. Understand your focus.
-          </h1>
+          <div className="space-y-3">
+            <h1 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-on-surface tracking-tight leading-[1.14]">
+              Capture your moments. Understand your focus.
+            </h1>
+            <p className="text-sm sm:text-base text-on-surface-muted leading-relaxed max-w-xl">
+              A private, distraction-free space to record daily thoughts, track energy shifts,
+              and uncover patterns in your decisions. No noise, no endless forms—just pure cognitive clarity.
+            </p>
+          </div>
 
-          <p className="text-sm sm:text-base text-on-surface-muted leading-relaxed">
-            MindMoments is your private space to record daily thoughts, capture critical decisions,
-            and understand your energy rhythms. Instead of static notes that get forgotten, MindMoments
-            actively synthesizes your entries to highlight your focus patterns and peak cognitive hours.
-          </p>
-
-          {/* Quick CTA Actions */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          {/* Primary & Secondary Call to Actions */}
+          <div className="flex flex-wrap items-center gap-3 pt-1">
             <button
               type="button"
               onClick={() => onSelectView('myday')}
-              className="btn-press btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 shadow-sm"
+              className="btn-press btn-primary px-5 py-3 rounded-xl text-sm font-semibold flex items-center gap-2 shadow-sm"
             >
-              <span>Open My Day</span>
+              <span>Start with My Day</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <button
               type="button"
               onClick={() => onSelectView('aimind')}
-              className="btn-press glass-card px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:border-primary-blue/50 flex items-center gap-2 transition-colors"
+              className="btn-press px-4 py-3 rounded-xl text-sm font-medium text-on-surface bg-surface-low hover:bg-surface-low/80 border border-border-subtle flex items-center gap-2 transition-colors"
             >
               <MessageSquare className="w-4 h-4 text-primary-blue" />
               <span>Ask AI Mind</span>
@@ -68,174 +64,139 @@ export function LandingView({ onSelectView, entriesCount }: LandingViewProps) {
             <button
               type="button"
               onClick={() => onSelectView('forecast')}
-              className="btn-press glass-card px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:border-primary-blue/50 flex items-center gap-2 transition-colors"
+              className="btn-press px-4 py-3 rounded-xl text-sm font-medium text-on-surface hover:text-primary-blue transition-colors flex items-center gap-1.5"
             >
-              <Compass className="w-4 h-4 text-primary-blue" />
-              <span>Occurrence Forecast</span>
+              <span>Explore Forecast</span>
+              <ChevronRight className="w-4 h-4 opacity-60" />
             </button>
+          </div>
+
+          {/* Privacy & Storage Footnote */}
+          <div className="flex items-center gap-4 text-xs text-on-surface-muted pt-2">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>{entriesCount} moments in local IndexedDB</span>
+            </div>
+            <span>•</span>
+            <div className="flex items-center gap-1.5">
+              <Lock className="w-3.5 h-3.5 text-primary-blue" />
+              <span>100% Private to your device</span>
+            </div>
           </div>
         </div>
 
-        {/* Live Status Chip */}
-        <div className="pt-4 border-t border-border-subtle flex flex-wrap items-center justify-between text-xs text-on-surface-muted gap-2">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>
-              <strong>{entriesCount} moments</strong> currently stored locally in your private IndexedDB
-            </span>
+        {/* Right Column: Live Product Demonstration Snippet */}
+        <div className="lg:col-span-5 flex flex-col gap-3">
+          {/* Simulated Active Diary Entry */}
+          <div className="glass-card p-4 rounded-2xl border border-border-subtle shadow-md space-y-2.5">
+            <div className="flex items-center justify-between text-xs text-on-surface-muted">
+              <span className="font-semibold text-primary-blue flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-primary-blue animate-pulse" />
+                Live Reflection Sample
+              </span>
+              <span>Today, 10:15 AM</span>
+            </div>
+            <p className="text-sm font-medium text-on-surface leading-snug">
+              &quot;Protected a 2-hour morning window with zero notifications. Built the complete storage layer in one uninterrupted flow session.&quot;
+            </p>
+            <div className="flex items-center justify-between pt-2 border-t border-border-subtle/50 text-[11px]">
+              <span className="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500 font-semibold border border-emerald-500/20">
+                Breakthrough
+              </span>
+              <span className="text-on-surface-muted">#architecture #focus</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5 font-medium text-on-surface">
-            <Lock className="w-3.5 h-3.5 text-primary-blue" />
-            <span>100% Offline &amp; Private</span>
+
+          {/* Simulated Forecast Micro-Metric */}
+          <div className="p-3.5 rounded-2xl bg-surface-low border border-border-subtle flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-primary-blue/10 text-primary-blue flex items-center justify-center font-bold text-xs">
+                94%
+              </div>
+              <div>
+                <p className="font-semibold text-on-surface text-xs leading-none">Peak Focus Anticipated</p>
+                <p className="text-[11px] text-on-surface-muted mt-0.5">Optimal for architecture &amp; deep coding</p>
+              </div>
+            </div>
+            <span className="text-[11px] font-semibold text-primary-blue">9:00 – 11:30 AM</span>
           </div>
         </div>
       </section>
 
-      {/* 2. What the App Does & How It Helps You */}
-      <section className="space-y-4">
-        <div>
+      {/* 2. Core Capabilities: Flat Clean 3-Column Layout (NO heavy box wrapping) */}
+      <section className="space-y-6 pt-6 border-t border-border-subtle">
+        <div className="space-y-1">
           <h2 className="text-lg sm:text-xl font-bold text-on-surface tracking-tight">
-            How MindMoments Works For You
+            Designed for how your brain actually works
           </h2>
           <p className="text-xs text-on-surface-muted">
-            Designed for engineers, builders, and deep thinkers who want clarity on where their energy goes.
+            Three simple ways MindMoments helps you protect your focus and decisions every day.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Feature 1 */}
-          <div className="glass-card p-5 rounded-2xl space-y-3 border border-border-subtle">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Pillar 1 */}
+          <div className="space-y-2.5">
             <div className="w-9 h-9 rounded-xl bg-surface-low text-primary-blue flex items-center justify-center border border-border-subtle">
               <Zap className="w-4 h-4" />
             </div>
-            <h3 className="text-sm font-bold text-on-surface">Capture Thoughts in Seconds</h3>
+            <h3 className="text-sm font-bold text-on-surface">1. Capture in Seconds</h3>
             <p className="text-xs text-on-surface-muted leading-relaxed">
-              Log architectural decisions, breakthroughs, or mental fatigue on the fly. Tag each moment with cognitive states like Focused, Breakthrough, or Uncertain.
+              Don&apos;t let breakthroughs slip away. Log thoughts, decisions, or burnout signals in under 15 seconds with 1-click mood tags.
             </p>
-            <button
-              type="button"
-              onClick={() => onSelectView('myday')}
-              className="text-xs font-semibold text-primary-blue flex items-center gap-1 hover:underline pt-1"
-            >
-              <span>Try logging a moment</span>
-              <ChevronRight className="w-3 h-3" />
-            </button>
           </div>
 
-          {/* Feature 2 */}
-          <div className="glass-card p-5 rounded-2xl space-y-3 border border-border-subtle">
+          {/* Pillar 2 */}
+          <div className="space-y-2.5">
             <div className="w-9 h-9 rounded-xl bg-surface-low text-primary-blue flex items-center justify-center border border-border-subtle">
               <Compass className="w-4 h-4" />
             </div>
-            <h3 className="text-sm font-bold text-on-surface">Anticipate Your Energy</h3>
+            <h3 className="text-sm font-bold text-on-surface">2. Anticipate Energy Rhythms</h3>
             <p className="text-xs text-on-surface-muted leading-relaxed">
-              The Occurrence Forecast correlates sleep and late-night work with afternoon fatigue. It alerts you when to schedule deep coding versus lighter tasks.
+              Spot afternoon fatigue before it hits. Occurrence Forecast tracks your energy cycles so you can schedule deep work during peak windows.
             </p>
-            <button
-              type="button"
-              onClick={() => onSelectView('forecast')}
-              className="text-xs font-semibold text-primary-blue flex items-center gap-1 hover:underline pt-1"
-            >
-              <span>View your forecast</span>
-              <ChevronRight className="w-3 h-3" />
-            </button>
           </div>
 
-          {/* Feature 3 */}
-          <div className="glass-card p-5 rounded-2xl space-y-3 border border-border-subtle">
+          {/* Pillar 3 */}
+          <div className="space-y-2.5">
             <div className="w-9 h-9 rounded-xl bg-surface-low text-primary-blue flex items-center justify-center border border-border-subtle">
               <Brain className="w-4 h-4" />
             </div>
-            <h3 className="text-sm font-bold text-on-surface">Converse with Your Past</h3>
+            <h3 className="text-sm font-bold text-on-surface">3. Conversational Reflection</h3>
             <p className="text-xs text-on-surface-muted leading-relaxed">
-              Ask your AI Mind questions like &quot;What decisions did I make about our storage engine?&quot; or &quot;Why did I feel drained last Thursday?&quot;
+              Ask your AI Mind about past decisions, fatigue triggers, or breakthrough patterns. Every answer is grounded directly in your recorded diary.
             </p>
-            <button
-              type="button"
-              onClick={() => onSelectView('aimind')}
-              className="text-xs font-semibold text-primary-blue flex items-center gap-1 hover:underline pt-1"
-            >
-              <span>Chat with memories</span>
-              <ChevronRight className="w-3 h-3" />
-            </button>
           </div>
         </div>
       </section>
 
-      {/* 3. Three-Step Workflow */}
-      <section className="glass-card p-6 sm:p-8 rounded-2xl border border-border-subtle space-y-6">
-        <div>
-          <h2 className="text-base sm:text-lg font-bold text-on-surface tracking-tight">
-            Simple 3-Step Daily Routine
-          </h2>
-          <p className="text-xs text-on-surface-muted">
-            No complex setup or rigid templates required.
+      {/* 3. Bottom Direct Action Banner */}
+      <section className="p-6 sm:p-8 rounded-2xl bg-surface-low border border-border-subtle flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <h3 className="text-sm sm:text-base font-bold text-on-surface">
+            Ready to log your first moment?
+          </h3>
+          <p className="text-xs text-on-surface-muted max-w-lg leading-relaxed">
+            Start with My Day, view your personalized forecast, or seed demo data to see the timeline in action.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl bg-surface-low border border-border-subtle space-y-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-primary-blue">
-              <span className="w-5 h-5 rounded-full bg-primary-blue text-white flex items-center justify-center text-[10px]">
-                1
-              </span>
-              <span>Quick Capture</span>
-            </div>
-            <h4 className="text-xs font-bold text-on-surface">Drop thoughts as they happen</h4>
-            <p className="text-[11px] text-on-surface-muted leading-relaxed">
-              Spend 15 seconds recording when a task goes well or when you hit a road-block.
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-surface-low border border-border-subtle space-y-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-primary-blue">
-              <span className="w-5 h-5 rounded-full bg-primary-blue text-white flex items-center justify-center text-[10px]">
-                2
-              </span>
-              <span>Review Rhythm</span>
-            </div>
-            <h4 className="text-xs font-bold text-on-surface">Check your peak focus hours</h4>
-            <p className="text-[11px] text-on-surface-muted leading-relaxed">
-              Protect your high-energy mornings and guard against post-lunch slump cycles.
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-surface-low border border-border-subtle space-y-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-primary-blue">
-              <span className="w-5 h-5 rounded-full bg-primary-blue text-white flex items-center justify-center text-[10px]">
-                3
-              </span>
-              <span>Weekly Retrospective</span>
-            </div>
-            <h4 className="text-xs font-bold text-on-surface">Surface strategic progress</h4>
-            <p className="text-[11px] text-on-surface-muted leading-relaxed">
-              Every week, review key breakthroughs, unresolved threads, and energy shifts.
-            </p>
-          </div>
+        <div className="flex items-center gap-2.5 shrink-0">
+          <button
+            type="button"
+            onClick={() => onSelectView('myday')}
+            className="btn-press btn-primary px-4 py-2 rounded-xl text-xs font-semibold"
+          >
+            Open My Day
+          </button>
+          <button
+            type="button"
+            onClick={() => onSelectView('forecast')}
+            className="btn-press px-4 py-2 rounded-xl text-xs font-medium text-on-surface hover:bg-surface-card transition-colors border border-border-subtle"
+          >
+            View Forecast
+          </button>
         </div>
-      </section>
-
-      {/* 4. Privacy & Data Ownership */}
-      <section className="glass-card p-6 rounded-2xl border border-border-subtle flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex items-start gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-surface-low text-emerald-500 flex items-center justify-center shrink-0 border border-border-subtle">
-            <ShieldCheck className="w-5 h-5" />
-          </div>
-          <div className="space-y-1">
-            <h3 className="text-sm font-bold text-on-surface">Your Diary Stays on Your Device</h3>
-            <p className="text-xs text-on-surface-muted max-w-xl leading-relaxed">
-              MindMoments stores all your logs, thoughts, and conversational reflections inside your browser&apos;s IndexedDB. No accounts to create, and your personal diary is never transmitted to any third-party marketing database.
-            </p>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => onSelectView('myday')}
-          className="btn-press btn-primary px-4 py-2 rounded-xl text-xs font-semibold shrink-0"
-        >
-          Get Started
-        </button>
       </section>
     </div>
   );
