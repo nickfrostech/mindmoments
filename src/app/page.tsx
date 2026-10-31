@@ -148,46 +148,57 @@ export default function Home() {
     toast.success('Settings updated');
   };
 
+  const isSearching = searchQuery.trim().length > 0;
+
   // Filter moments according to currentView and searchQuery
   const filteredMoments = useMemo(() => {
-    let result = moments;
-
-    // Search query filter
+    // 1. If actively searching, search across all diary moments (content, tags, date, mood)
     if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      result = result.filter(
+      const q = searchQuery.toLowerCase().trim();
+      return moments.filter(
         (m) =>
           m.content.toLowerCase().includes(q) ||
           m.tags.some((t) => t.toLowerCase().includes(q)) ||
-          m.dateString.toLowerCase().includes(q)
+          m.dateString.toLowerCase().includes(q) ||
+          m.mood.toLowerCase().includes(q)
       );
     }
 
-    // View filter
+    // 2. View filter
     if (currentView === 'myday') {
-      return result.filter(
+      return moments.filter(
         (m) => m.dateString === todayStr || m.dateString.includes('Oct 31')
       );
     }
 
     if (currentView === 'important') {
-      return result.filter((m) => m.isImportant);
+      return moments.filter((m) => m.isImportant);
     }
 
     if (currentView === 'all') {
-      return result;
+      return moments;
     }
 
     if (currentView.startsWith('tag:')) {
       const tagId = currentView.replace('tag:', '');
-      return result.filter((m) => m.tags.includes(tagId));
+      return moments.filter((m) => m.tags.includes(tagId));
     }
 
-    return result;
+    return moments;
   }, [moments, currentView, searchQuery, todayStr]);
 
   // Dynamic header text & subtitle
   const headerMeta = useMemo(() => {
+    if (isSearching) {
+      return {
+        title: `Search: "${searchQuery}"`,
+        subtitle: `Found ${filteredMoments.length} matching moment${filteredMoments.length === 1 ? '' : 's'} across your diary`,
+        emptyTitle: `No moments matching "${searchQuery}"`,
+        emptySubtitle: 'Try searching for different keywords, tags, or feelings.',
+        buttonText: '',
+      };
+    }
+
     switch (currentView) {
       case 'home':
         return {
@@ -224,7 +235,7 @@ export default function Home() {
       case 'forecast':
         return {
           title: 'Occurrence Forecast',
-          subtitle: 'Gemma 2 predictive cognitive rhythm & fatigue anticipation',
+          subtitle: 'Predictive cognitive rhythm & fatigue anticipation',
           emptyTitle: '',
           emptySubtitle: '',
           buttonText: '',
@@ -264,9 +275,10 @@ export default function Home() {
           buttonText: 'Add moment',
         };
     }
-  }, [currentView, filteredMoments.length, todayFormatted]);
+  }, [currentView, filteredMoments.length, todayFormatted, isSearching, searchQuery]);
 
   const isListView =
+    isSearching ||
     currentView === 'myday' ||
     currentView === 'important' ||
     currentView === 'all' ||
@@ -364,13 +376,13 @@ export default function Home() {
         {/* Stage Content Area (Static overflow-hidden for AI Mind chat, scrollable for lists & cards) */}
         <div
           className={`flex-1 flex flex-col relative min-h-0 ${
-            currentView === 'aimind'
+            !isSearching && currentView === 'aimind'
               ? 'overflow-hidden p-3 sm:p-5'
               : 'overflow-y-auto custom-scroll p-4 sm:p-6 lg:p-8'
           }`}
         >
           {/* 0. Home / Landing Overview View */}
-          {currentView === 'home' && (
+          {!isSearching && currentView === 'home' && (
             <div className="w-full pb-12 animate-in fade-in duration-200">
               <LandingView
                 onSelectView={(v) => setCurrentView(v)}
@@ -380,27 +392,27 @@ export default function Home() {
           )}
 
           {/* A. Occurrence Forecast View */}
-          {currentView === 'forecast' && (
+          {!isSearching && currentView === 'forecast' && (
             <div className="max-w-4xl mx-auto w-full pb-12 animate-in fade-in duration-200">
               <OccurrenceForecastCard entries={moments} settings={settings} />
             </div>
           )}
 
           {/* B. AI Mind Conversational Chat View (Static window, only chat area scrolls) */}
-          {currentView === 'aimind' && (
+          {!isSearching && currentView === 'aimind' && (
             <div className="w-full h-full flex-1 flex flex-col min-h-0 animate-in fade-in duration-200">
               <AIMindChat entries={moments} settings={settings} />
             </div>
           )}
 
           {/* C. Weekly Retrospective View */}
-          {currentView === 'recap' && (
+          {!isSearching && currentView === 'recap' && (
             <div className="max-w-4xl mx-auto w-full pb-12 animate-in fade-in duration-200">
               <WeeklyRecapCard entries={moments} settings={settings} />
             </div>
           )}
 
-          {/* D. Moment List Views (My Day, Important, All, Tags) */}
+          {/* D. Moment List Views (My Day, Important, All, Tags, or Active Search) */}
           {isListView && (
             <div className="max-w-3xl mx-auto w-full flex-1 flex flex-col pb-24">
               {filteredMoments.length === 0 ? (
@@ -553,7 +565,7 @@ export default function Home() {
         </div>
 
         {/* 3. Bottom Floating Input Bar (Glassy effect) */}
-        {isListView && (
+        {isListView && !isSearching && (
           <BottomInputBar
             onSave={handleSaveMoment}
             defaultTag={currentView.startsWith('tag:') ? currentView.replace('tag:', '') : undefined}

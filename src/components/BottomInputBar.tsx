@@ -11,14 +11,14 @@ interface BottomInputBarProps {
   defaultTag?: string;
 }
 
-const DEFAULT_TAGS = ['decision', 'project', 'code', 'life', 'reflection'];
+const DEFAULT_TAGS = ['life', 'health', 'decision', 'work', 'reflection', 'family'];
 
 export function BottomInputBar({ onSave, defaultTag }: BottomInputBarProps) {
   const [content, setContent] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [selectedMood, setSelectedMood] = useState<MoodType>('focused');
   const [selectedTags, setSelectedTags] = useState<string[]>(
-    defaultTag && defaultTag !== 'all' ? [defaultTag] : ['project']
+    defaultTag && defaultTag !== 'all' ? [defaultTag] : ['life']
   );
 
   const toggleTag = (tag: string) => {
@@ -61,7 +61,7 @@ export function BottomInputBar({ onSave, defaultTag }: BottomInputBarProps) {
             onChange={(e) => setContent(e.target.value)}
             onFocus={() => setIsFocused(true)}
             onKeyDown={handleKeyDown}
-            placeholder="Add a moment, decision, or thought..."
+            placeholder="Add a moment, thought, or realization..."
             className="w-full bg-transparent border-0 text-sm text-on-surface placeholder:text-on-surface-muted/60 focus:ring-0 p-1 outline-none"
           />
           <button

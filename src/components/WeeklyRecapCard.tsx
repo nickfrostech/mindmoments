@@ -18,19 +18,19 @@ export function WeeklyRecapCard({ entries, settings }: WeeklyRecapCardProps) {
     return {
       period: 'Oct 24 – Oct 31, 2026',
       keyDecisions: [
-        'Adopted open-weight Gemma 2 for data privacy and local memory reasoning.',
-        'Selected SQLite over distributed database architecture to simplify initial rollout.',
-        'Refactored UI transitions to Emil Kowalski spring motion standards.',
+        'Established a firm 11:00 PM screen curfew to protect morning cognitive energy.',
+        'Replaced heavy carb lunches with balanced meals to eliminate mid-afternoon slumps.',
+        'Declined non-essential weekend commitments to safeguard rest and family time.',
       ],
       breakthroughs: [
-        'Rapid prototype development during uninterrupted morning flow states.',
-        'Completed full local-first persistence engine with zero backend dependency.',
+        'Maintained 90%+ focus across morning blocks by eliminating phone notifications.',
+        'Successfully replaced afternoon caffeine spikes with 20-minute outdoor walks.',
       ],
       energyRhythmAnalysis:
-        'High cognitive velocity recorded in the mornings (90%+ focus). Mid-afternoon slumps recorded on Wednesdays and Fridays following late-night coding sessions.',
+        'Highest cognitive clarity consistently recorded between 9:00 AM and 11:30 AM. Slumps recorded in mid-afternoons on days following late-night phone scrolling.',
       unresolvedThreads: [
-        'Complete Hacktoberfest MLH submission documentation and video pitch.',
-        'Maintain a strict 11:30 PM curfew to prevent post-midnight burnout.',
+        'Decide on photography workshop enrollment before Monday registration deadline.',
+        'Maintain a consistent 8-hour sleep schedule across both weekdays and weekends.',
       ],
       totalEntriesCount: entries.length || 14,
     };

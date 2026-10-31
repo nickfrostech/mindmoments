@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   FolderKanban,
   Lightbulb,
+  X,
 } from 'lucide-react';
 import { ViewType, MemoryEntry } from '../types/memory';
 
@@ -59,8 +60,8 @@ export function Sidebar({
   // Tag lists
   const customCategories = [
     { id: 'decision', label: 'Decisions', icon: CheckCircle2 },
-    { id: 'project', label: 'Projects', icon: FolderKanban },
-    { id: 'code', label: 'To build & Code', icon: Tag },
+    { id: 'life', label: 'Life & Personal', icon: Tag },
+    { id: 'health', label: 'Health & Energy', icon: FolderKanban },
     { id: 'reflection', label: 'Reflections & Ideas', icon: Lightbulb },
   ];
 
@@ -134,7 +135,7 @@ export function Sidebar({
 
         {/* Search Bar */}
         <div className="p-3 border-b border-border-subtle">
-          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-low border border-border-subtle text-xs">
+          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-low border border-border-subtle text-xs focus-within:border-primary-blue/60 focus-within:ring-1 focus-within:ring-primary-blue/30 transition-all">
             <Search className="w-3.5 h-3.5 text-on-surface-muted shrink-0" />
             <input
               type="text"
@@ -143,6 +144,16 @@ export function Sidebar({
               placeholder="Search moments..."
               className="w-full bg-transparent border-0 text-on-surface placeholder:text-on-surface-muted/60 focus:ring-0 p-0 text-xs outline-none"
             />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => onSearchChange('')}
+                className="p-0.5 rounded text-on-surface-muted hover:text-on-surface transition-colors"
+                title="Clear search"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            )}
           </div>
         </div>
 

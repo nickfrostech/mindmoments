@@ -99,13 +99,13 @@ export function LandingView({ onSelectView, entriesCount }: LandingViewProps) {
               <span>Today, 10:15 AM</span>
             </div>
             <p className="text-sm font-medium text-on-surface leading-snug">
-              &quot;Protected a 2-hour morning window with zero notifications. Built the complete storage layer in one uninterrupted flow session.&quot;
+              &quot;Protected an uninterrupted morning block with no phone notifications. Finished our monthly budget and felt completely at ease.&quot;
             </p>
             <div className="flex items-center justify-between pt-2 border-t border-border-subtle/50 text-[11px]">
               <span className="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500 font-semibold border border-emerald-500/20">
                 Breakthrough
               </span>
-              <span className="text-on-surface-muted">#architecture #focus</span>
+              <span className="text-on-surface-muted">#life #decision</span>
             </div>
           </div>
 
@@ -117,7 +117,7 @@ export function LandingView({ onSelectView, entriesCount }: LandingViewProps) {
               </div>
               <div>
                 <p className="font-semibold text-on-surface text-xs leading-none">Peak Focus Anticipated</p>
-                <p className="text-[11px] text-on-surface-muted mt-0.5">Optimal for architecture &amp; deep coding</p>
+                <p className="text-[11px] text-on-surface-muted mt-0.5">Optimal for creative projects &amp; planning</p>
               </div>
             </div>
             <span className="text-[11px] font-semibold text-primary-blue">9:00 – 11:30 AM</span>
