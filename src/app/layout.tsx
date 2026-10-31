@@ -33,21 +33,21 @@ export const metadata: Metadata = {
     siteName: 'MindMoments',
     images: [
       {
-        url: '/mindmoments-logo.svg',
-        width: 64,
-        height: 64,
-        alt: 'MindMoments Logo',
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'MindMoments — Capture your moments. Understand your focus.',
       },
     ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'MindMoments — Cognitive Diary & Memory Reflection',
     description:
       'A private, local-first personal diary and cognitive reflection system to track focus, fatigue, and strategic decisions.',
-    images: ['/mindmoments-logo.svg'],
+    images: ['/og.png'],
   },
 };
 
