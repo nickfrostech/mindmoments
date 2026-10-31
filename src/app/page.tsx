@@ -274,7 +274,10 @@ export default function Home() {
 
   // Active AI Provider label
   const activeModelLabel = useMemo(() => {
-    if (settings.useLocalOllama) return 'Ollama (gemma2:2b)';
+    if (settings.useLocalOllama) {
+      const isDO = settings.ollamaEndpoint && !settings.ollamaEndpoint.includes('localhost') && !settings.ollamaEndpoint.includes('127.0.0.1');
+      return isDO ? 'DigitalOcean (gemma2)' : 'Ollama (gemma2:2b)';
+    }
     if (settings.groqApiKey) return 'GPT-OSS 120B (Groq)';
     if (settings.geminiApiKey) return 'Gemma 4 31B (Google)';
     return 'Simulated Engine';

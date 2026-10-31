@@ -140,15 +140,15 @@ export function SettingsModal({
             </p>
           </div>
 
-          {/* Local Ollama Toggle */}
+          {/* DigitalOcean / Self-Hosted / Local Ollama Toggle */}
           <div className="pt-2 border-t border-border-subtle space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Cpu className="w-4 h-4 text-emerald-500" />
                 <div>
-                  <h4 className="text-xs font-semibold text-on-surface">Offline Local Ollama</h4>
+                  <h4 className="text-xs font-semibold text-on-surface">DigitalOcean / Self-Hosted Droplet</h4>
                   <p className="text-[11px] text-on-surface-muted">
-                    Run Gemma 2 100% offline via local Ollama
+                    Route inference to a DigitalOcean Droplet or local Ollama
                   </p>
                 </div>
               </div>
@@ -161,17 +161,22 @@ export function SettingsModal({
             </div>
 
             {useLocalOllama && (
-              <div>
-                <label className="text-[11px] font-medium text-on-surface-muted block mb-1">
-                  Ollama Endpoint URL
-                </label>
-                <input
-                  type="text"
-                  value={ollamaEndpoint}
-                  onChange={(e) => setOllamaEndpoint(e.target.value)}
-                  placeholder="http://localhost:11434"
-                  className="w-full rounded-xl bg-surface-low border border-border-subtle px-3 py-1.5 text-xs text-on-surface font-mono outline-none"
-                />
+              <div className="space-y-2 pt-1 animate-in fade-in duration-150">
+                <div>
+                  <label className="text-[11px] font-medium text-on-surface-muted block mb-1">
+                    DigitalOcean Droplet IP or Server URL
+                  </label>
+                  <input
+                    type="text"
+                    value={ollamaEndpoint}
+                    onChange={(e) => setOllamaEndpoint(e.target.value)}
+                    placeholder="http://143.198.xxx.xxx:11434 or http://localhost:11434"
+                    className="w-full rounded-xl bg-surface-low border border-border-subtle px-3 py-1.5 text-xs text-on-surface font-mono outline-none focus:border-primary-blue"
+                  />
+                </div>
+                <p className="text-[10px] text-on-surface-muted">
+                  Supports any DigitalOcean Droplet running Ollama (<code className="text-primary-blue">gemma2:2b</code>) or vLLM.
+                </p>
               </div>
             )}
           </div>

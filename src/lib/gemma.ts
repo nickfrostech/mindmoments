@@ -39,7 +39,13 @@ export function getActiveProviderName(options: GemmaRequestOptions = {}): {
 	const geminiKey = options.geminiApiKey || process.env.GEMINI_API_KEY;
 
 	if (options.useLocalOllama) {
-		return { name: "Ollama (Offline)", model: "gemma2:2b", isRealAI: true };
+		const endpoint = options.ollamaEndpoint || "http://localhost:11434";
+		const isDO = !endpoint.includes("localhost") && !endpoint.includes("127.0.0.1");
+		return {
+			name: isDO ? "DigitalOcean Droplet" : "Ollama (Offline)",
+			model: "gemma2:2b",
+			isRealAI: true,
+		};
 	}
 	if (groqKey) {
 		return {
@@ -209,6 +215,42 @@ export async function callGemmaChat(
 	}
 	if (cleanedHistory.length === 0) {
 		cleanedHistory = [{ role: "user", content: "Hello" }];
+	}
+
+	// 0. PRIORITY IF ENABLED: DigitalOcean Droplet or Local Ollama
+	if (options.useLocalOllama) {
+		const endpoint = (options.ollamaEndpoint || "http://localhost:11434").replace(/\/$/, "");
+		const isDO = !endpoint.includes("localhost") && !endpoint.includes("127.0.0.1");
+		const providerName = isDO ? "DigitalOcean Droplet" : "Local Ollama";
+
+		try {
+			const res = await fetch(`${endpoint}/api/chat`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					model: "gemma2:2b",
+					messages: [
+						{ role: "system", content: systemPrompt },
+						...cleanedHistory.map((m) => ({ role: m.role, content: m.content })),
+					],
+					stream: false,
+				}),
+			});
+
+			if (res.ok) {
+				const data = await res.json();
+				const content = data.message?.content || data.response;
+				if (content) {
+					return {
+						content,
+						provider: providerName,
+						model: "gemma2:2b",
+					};
+				}
+			}
+		} catch (e) {
+			console.warn(`[${providerName} Chat Failed, falling back]:`, e);
+		}
 	}
 
 	// 1. PRIMARY: openai/gpt-oss-120b on Groq
